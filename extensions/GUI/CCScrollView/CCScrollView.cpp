@@ -415,9 +415,9 @@ void ScrollView::deaccelerateScrolling(float dt)
     this->setContentOffset(Vec2(newX,newY));
     
     if ((fabsf(_scrollDistance.x) <= SCROLL_DEACCEL_DIST &&
-         fabsf(_scrollDistance.y) <= SCROLL_DEACCEL_DIST) ||
-        newY >= maxInset.y || newY <= minInset.y ||
-        newX >= maxInset.x || newX <= minInset.x)
+         fabsf(_scrollDistance.y) <= SCROLL_DEACCEL_DIST) ) //||
+//        newY >= maxInset.y || newY <= minInset.y ||
+//        newX >= maxInset.x || newX <= minInset.x)
     {
         this->unschedule(schedule_selector(ScrollView::deaccelerateScrolling));
         this->relocateContainer(true);

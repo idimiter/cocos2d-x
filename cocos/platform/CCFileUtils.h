@@ -110,7 +110,15 @@ public:
      */
     virtual unsigned char* getFileDataFromZip(const std::string& zipFilePath, const std::string& filename, ssize_t *size);
 
-    
+	/**
+	 *  Gets path from a given filename
+	 *
+	 *  @param[in]  filename The resource file name which contains the path
+	 *  @return Returns std::string with the base path from the filename
+	 */
+	virtual std::string getPathFromFilename(const std::string &filename);
+
+
     /** Returns the fullpath for a given filename.
      
      First it will try to get a new filename from the "filenameLookup" dictionary.

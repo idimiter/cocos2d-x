@@ -40,7 +40,6 @@ THE SOFTWARE.
 #include "WidgetReader/ScrollViewReader/ScrollViewReader.h"
 #include "WidgetReader/ListViewReader/ListViewReader.h"
 #include "cocostudio/CocoLoader.h"
-#include "ui/CocosGUI.h"
 
 using namespace cocos2d;
 using namespace cocos2d::ui;
@@ -171,6 +170,27 @@ void GUIReader::registerTypeAndCallBack(const std::string& classType,
         _mapObject.insert(ParseObjectMap::value_type(classType, object));
     }
     
+    if (callBack)
+    {
+        _mapParseSelector.insert(ParseCallBackMap::value_type(classType, callBack));
+    }
+}
+
+void GUIReader::registerTypeAndCallBack(const std::string& classType,
+                                        ObjectFactory::InstanceFunc ins,
+                                        Ref *object,
+                                        SEL_ParseEvent callBack)
+{
+    ObjectFactory* factoryCreate = ObjectFactory::getInstance();
+
+    ObjectFactory::TInfo t(classType, ins);
+    factoryCreate->registerType(t);
+
+    if (object)
+    {
+        _mapObject.insert(ParseObjectMap::value_type(classType, object));
+    }
+
     if (callBack)
     {
         _mapParseSelector.insert(ParseCallBackMap::value_type(classType, callBack));
@@ -1512,11 +1532,11 @@ void WidgetPropertiesReader0300::setPropsForAllCustomWidgetFromJsonDictionary(co
 {
     GUIReader* guiReader = GUIReader::getInstance();
     
-    std::map<std::string, Ref*> object_map = GUIReader::getInstance()->getParseObjectMap();
-    Ref* object = object_map[classType];
+    std::map<std::string, Ref*> *object_map = guiReader->getParseObjectMap();
+    Ref* object = (*object_map)[classType];
     
-    std::map<std::string, SEL_ParseEvent> selector_map = guiReader->getParseCallBackMap();
-    SEL_ParseEvent selector = selector_map[classType];
+    std::map<std::string, SEL_ParseEvent> *selector_map = guiReader->getParseCallBackMap();
+    SEL_ParseEvent selector = (*selector_map)[classType];
     
     if (object && selector)
     {

@@ -43,6 +43,7 @@ THE SOFTWARE.
 #include "2d/CCComponent.h"
 #include "2d/CCComponentContainer.h"
 #include "renderer/CCGLProgram.h"
+#include "renderer/CCGLProgramState.h"
 #include "math/TransformUtils.h"
 
 #include "deprecated/CCString.h"
@@ -68,8 +69,10 @@ bool nodeComparisonLess(Node* n1, Node* n2)
            );
 }
 
-// XXX: Yes, nodes might have a sort problem once every 15 days if the game runs at 60 FPS and each frame sprites are reordered.
+// FIXME:: Yes, nodes might have a sort problem once every 15 days if the game runs at 60 FPS and each frame sprites are reordered.
 int Node::s_globalOrderOfArrival = 1;
+
+// MARK: Constructor, Destructor, Init
 
 Node::Node(void)
 : _rotationX(0.0f)
@@ -123,6 +126,7 @@ Node::Node(void)
 , _cascadeColorEnabled(false)
 , _cascadeOpacityEnabled(false)
 , _usingNormalizedPosition(false)
+, _normalizedPositionDirty(false)
 , _name("")
 , _hashOfName(0)
 , _cameraMask(1)
@@ -141,6 +145,20 @@ Node::Node(void)
     _scriptType = engine != nullptr ? engine->getScriptType() : kScriptTypeNone;
 #endif
     _transform = _inverse = _additionalTransform = Mat4::IDENTITY;
+}
+
+Node * Node::create()
+{
+    Node * ret = new (std::nothrow) Node();
+    if (ret && ret->init())
+    {
+        ret->autorelease();
+    }
+    else
+    {
+        CC_SAFE_DELETE(ret);
+    }
+    return ret;
 }
 
 Node::~Node()
@@ -192,6 +210,34 @@ bool Node::init()
 {
     return true;
 }
+
+void Node::cleanup()
+{
+    // actions
+    this->stopAllActions();
+    this->unscheduleAllSelectors();
+
+#if CC_ENABLE_SCRIPT_BINDING
+    if ( _scriptType != kScriptTypeNone)
+    {
+        int action = kNodeOnCleanup;
+        BasicScriptData data(this,(void*)&action);
+        ScriptEvent scriptEvent(kNodeEvent,(void*)&data);
+        ScriptEngineManager::getInstance()->getScriptEngine()->sendEvent(&scriptEvent);
+    }
+#endif // #if CC_ENABLE_SCRIPT_BINDING
+
+    // timers
+    for( const auto &child: _children)
+        child->cleanup();
+}
+
+std::string Node::getDescription() const
+{
+    return StringUtils::format("<Node | Tag = %d", _tag);
+}
+
+// MARK: getters / setters
 
 float Node::getSkewX() const
 {
@@ -549,7 +595,7 @@ void Node::setPositionZ(float positionZ)
 
     _positionZ = positionZ;
 
-    // XXX BUG
+    // FIXME: BUG
     // Global Z Order should based on the modelViewTransform
     setGlobalZOrder(positionZ);
 }
@@ -568,6 +614,7 @@ void Node::setNormalizedPosition(const Vec2& position)
 
     _normalizedPosition = position;
     _usingNormalizedPosition = true;
+    _normalizedPositionDirty = true;
     _transformUpdated = _transformDirty = _inverseDirty = true;
 }
 
@@ -757,46 +804,7 @@ Rect Node::getBoundingBox() const
     return RectApplyAffineTransform(rect, getNodeToParentAffineTransform());
 }
 
-Node * Node::create()
-{
-	Node * ret = new (std::nothrow) Node();
-    if (ret && ret->init())
-    {
-        ret->autorelease();
-    }
-    else
-    {
-        CC_SAFE_DELETE(ret);
-    }
-	return ret;
-}
-
-void Node::cleanup()
-{
-    // actions
-    this->stopAllActions();
-    this->unscheduleAllSelectors();
-    
-#if CC_ENABLE_SCRIPT_BINDING
-    if ( _scriptType != kScriptTypeNone)
-    {
-        int action = kNodeOnCleanup;
-        BasicScriptData data(this,(void*)&action);
-        ScriptEvent scriptEvent(kNodeEvent,(void*)&data);
-        ScriptEngineManager::getInstance()->getScriptEngine()->sendEvent(&scriptEvent);
-    }
-#endif // #if CC_ENABLE_SCRIPT_BINDING
-    
-    // timers
-    for( const auto &child: _children)
-        child->cleanup();
-}
-
-
-std::string Node::getDescription() const
-{
-    return StringUtils::format("<Node | Tag = %d", _tag);
-}
+// MARK: Children logic
 
 // lazy allocs
 void Node::childrenAlloc()
@@ -1183,6 +1191,8 @@ void Node::sortAllChildren()
     }
 }
 
+// MARK: draw / visit
+
 void Node::draw()
 {
     auto renderer = Director::getInstance()->getRenderer();
@@ -1202,17 +1212,21 @@ void Node::visit()
 
 uint32_t Node::processParentFlags(const Mat4& parentTransform, uint32_t parentFlags)
 {
+    if(_usingNormalizedPosition) {
+        CCASSERT(_parent, "setNormalizedPosition() doesn't work with orphan nodes");
+        if ((parentFlags & FLAGS_CONTENT_SIZE_DIRTY) || _normalizedPositionDirty) {
+            auto s = _parent->getContentSize();
+            _position.x = _normalizedPosition.x * s.width;
+            _position.y = _normalizedPosition.y * s.height;
+            _transformUpdated = _transformDirty = _inverseDirty = true;
+            _normalizedPositionDirty = false;
+        }
+    }
+    
     uint32_t flags = parentFlags;
     flags |= (_transformUpdated ? FLAGS_TRANSFORM_DIRTY : 0);
     flags |= (_contentSizeDirty ? FLAGS_CONTENT_SIZE_DIRTY : 0);
-
-    if(_usingNormalizedPosition && (flags & FLAGS_CONTENT_SIZE_DIRTY)) {
-        CCASSERT(_parent, "setNormalizedPosition() doesn't work with orphan nodes");
-        auto s = _parent->getContentSize();
-        _position.x = _normalizedPosition.x * s.width;
-        _position.y = _normalizedPosition.y * s.height;
-        _transformUpdated = _transformDirty = _inverseDirty = true;
-    }
+    
 
     if(flags & FLAGS_DIRTY_MASK)
         _modelViewTransform = this->transform(parentTransform);
@@ -1290,6 +1304,8 @@ Mat4 Node::transform(const Mat4& parentTransform)
     ret  = parentTransform * ret;
     return ret;
 }
+
+// MARK: events
 
 void Node::onEnter()
 {
@@ -1419,6 +1435,8 @@ void Node::setActionManager(ActionManager* actionManager)
     }
 }
 
+// MARK: actions
+
 Action * Node::runAction(Action* action)
 {
     CCASSERT( action != nullptr, "Argument must be non-nil");
@@ -1459,7 +1477,7 @@ ssize_t Node::getNumberOfRunningActions() const
     return _actionManager->getNumberOfRunningActionsInTarget(this);
 }
 
-// Node - Callbacks
+// MARK: Callbacks
 
 void Node::setScheduler(Scheduler* scheduler)
 {
@@ -1590,6 +1608,8 @@ void Node::update(float fDelta)
     }
 }
 
+// MARK: coordinates
+
 AffineTransform Node::getNodeToParentAffineTransform() const
 {
     AffineTransform ret;
@@ -1657,7 +1677,7 @@ const Mat4& Node::getNodeToParentTransform() const
             _transform.translate(anchorPoint.x, anchorPoint.y, 0);
         }
         
-        // XXX
+        // FIXME:
         // FIX ME: Expensive operation.
         // FIX ME: It should be done together with the rotationZ
         if(_rotationY) {
@@ -1676,22 +1696,26 @@ const Mat4& Node::getNodeToParentTransform() const
             _transform.translate(-anchorPoint.x, -anchorPoint.y, 0);
         }
         
-        // XXX: Try to inline skew
+        // FIXME:: Try to inline skew
         // If skew is needed, apply skew and then anchor point
         if (needsSkewMatrix)
         {
-            Mat4 skewMatrix(1, (float)tanf(CC_DEGREES_TO_RADIANS(_skewY)), 0, 0,
-                              (float)tanf(CC_DEGREES_TO_RADIANS(_skewX)), 1, 0, 0,
-                              0,  0,  1, 0,
-                              0,  0,  0, 1);
+            float skewMatArray[16] =
+            {
+                1, (float)tanf(CC_DEGREES_TO_RADIANS(_skewY)), 0, 0,
+                (float)tanf(CC_DEGREES_TO_RADIANS(_skewX)), 1, 0, 0,
+                0,  0,  1, 0,
+                0,  0,  0, 1
+            };
+            Mat4 skewMatrix(skewMatArray);
 
             _transform = _transform * skewMatrix;
 
             // adjust anchor point
             if (!_anchorPointInPoints.equals(Vec2::ZERO))
             {
-                // XXX: Argh, Mat4 needs a "translate" method.
-                // XXX: Although this is faster than multiplying a vec4 * mat4
+                // FIXME:: Argh, Mat4 needs a "translate" method.
+                // FIXME:: Although this is faster than multiplying a vec4 * mat4
                 _transform.m[12] += _transform.m[0] * -_anchorPointInPoints.x + _transform.m[4] * -_anchorPointInPoints.y;
                 _transform.m[13] += _transform.m[1] * -_anchorPointInPoints.x + _transform.m[5] * -_anchorPointInPoints.y;
             }
@@ -1844,6 +1868,8 @@ void Node::updateTransform()
         child->updateTransform();
 }
 
+// MARK: components
+
 Component* Node::getComponent(const std::string& name)
 {
     if( _componentContainer )
@@ -1881,6 +1907,9 @@ void Node::removeAllComponents()
 }
 
 #if CC_USE_PHYSICS
+
+// MARK: Physics
+
 void Node::updatePhysicsBodyTransform(Scene* scene)
 {
     updatePhysicsBodyScale(scene);
@@ -2034,6 +2063,8 @@ PhysicsBody* Node::getPhysicsBody() const
 }
 #endif //CC_USE_PHYSICS
 
+// MARK: Opacity and Color
+
 GLubyte Node::getOpacity(void) const
 {
 	return _realOpacity;
@@ -2183,6 +2214,7 @@ void Node::disableCascadeColor()
     }
 }
 
+// MARK: Camera
 void Node::setCameraMask(unsigned short mask, bool applyChildren)
 {
     _cameraMask = mask;
@@ -2193,6 +2225,8 @@ void Node::setCameraMask(unsigned short mask, bool applyChildren)
         }
     }
 }
+
+// MARK: Deprecated
 
 __NodeRGBA::__NodeRGBA()
 {

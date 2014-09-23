@@ -1105,6 +1105,9 @@
     <ClCompile Include="..\editor-support\cocosbuilder\CCSpriteLoader.cpp">
       <Filter>cocosbuilder\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\3d\CCBillBoard.cpp">
+      <Filter>3d</Filter>
+    </ClCompile>
     <ClCompile Include="..\ui\UIEditBox\UIEditBox.cpp">
       <Filter>ui\UIWidgets\EditBox</Filter>
     </ClCompile>
@@ -1164,6 +1167,12 @@
     </ClCompile>
     <ClCompile Include="..\ui\UIEditBox\UIEditBoxImpl-win32.cpp">
       <Filter>ui\UIWidgets\EditBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ui\UIWebViewImpl-win32.cpp">
+      <Filter>ui\UIWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ui\UIWebView.cpp">
+      <Filter>ui\UIWidgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2224,6 +2233,9 @@
     <ClInclude Include="..\editor-support\cocosbuilder\CocosBuilder.h">
       <Filter>cocosbuilder\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\3d\CCBillBoard.h">
+      <Filter>3d</Filter>
+    </ClInclude>
     <ClInclude Include="..\ui\UIEditBox\UIEditBox.h">
       <Filter>ui\UIWidgets\EditBox</Filter>
     </ClInclude>
@@ -2289,6 +2301,15 @@
     </ClInclude>
     <ClInclude Include="..\ui\UIEditBox\UIEditBoxImpl-win32.h">
       <Filter>ui\UIWidgets\EditBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ui\UIWebViewImpl-win32.h">
+      <Filter>ui\UIWidgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ui\UIWebView-inl.h">
+      <Filter>ui\UIWidgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ui\UIWebView.h">
+      <Filter>ui\UIWidgets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "ui/UIScale9Sprite.h"
 #include "renderer/CCGLProgram.h"
 #include "renderer/CCGLProgramCache.h"
+#include "renderer/ccGLStateCache.h"
 #include "base/CCDirector.h"
 #include "2d/CCDrawingPrimitives.h"
 #include "renderer/CCRenderer.h"
@@ -351,14 +352,37 @@ void Layout::drawFullScreenQuadClearStencil()
 {
     Director* director = Director::getInstance();
     CCASSERT(nullptr != director, "Director is null when seting matrix stack");
-    
+
+    director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+    director->loadIdentityMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+
     director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
     director->loadIdentityMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
     
-    director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-    director->loadIdentityMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+    Vec2 vertices[] = {
+        Vec2(-1, -1),
+        Vec2(1, -1),
+        Vec2(1, 1),
+        Vec2(-1, 1)
+    };
     
-    DrawPrimitives::drawSolidRect(Vec2(-1,-1), Vec2(1,1), Color4F(1, 1, 1, 1));
+    auto glProgram = GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_POSITION_U_COLOR);
+    
+    int colorLocation = glProgram->getUniformLocation("u_color");
+    CHECK_GL_ERROR_DEBUG();
+    
+    Color4F color(1, 1, 1, 1);
+    
+    glProgram->use();
+    glProgram->setUniformsForBuiltins();
+    glProgram->setUniformLocationWith4fv(colorLocation, (GLfloat*) &color.r, 1);
+    
+    GL::enableVertexAttribs( GL::VERTEX_ATTRIB_FLAG_POSITION );
+    
+    glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    
+    CC_INCREMENT_GL_DRAWN_BATCHES_AND_VERTICES(1, 4);
     
     director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
     director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);

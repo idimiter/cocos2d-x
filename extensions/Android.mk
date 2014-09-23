@@ -36,6 +36,7 @@ LOCAL_CXXFLAGS += -fexceptions
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/.. \
                     $(LOCAL_PATH)/../cocos \
+                    $(LOCAL_PATH)/../cocos/platform \
                     $(LOCAL_PATH)/../cocos/platform/android \
                     $(LOCAL_PATH)/../external/chipmunk/include/chipmunk \
                     $(LOCAL_PATH)/../external/curl/include/android \

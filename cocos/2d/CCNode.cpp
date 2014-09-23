@@ -479,7 +479,8 @@ void Node::setScaleZ(float scaleZ)
 #if CC_USE_PHYSICS
     if (_physicsBody != nullptr)
     {
-        CCLOG("Node WARNING: PhysicsBody doesn't support setScaleZ");
+// Mitko:: Silence this for now
+//        CCLOG("Node WARNING: PhysicsBody doesn't support setScaleZ");
     }
 #endif
     
@@ -2011,7 +2012,8 @@ void Node::setPhysicsBody(PhysicsBody* body)
         // it cann't support both of them, so I clear the anthor point to default.
         if (!getAnchorPoint().equals(Vec2::ANCHOR_MIDDLE))
         {
-            CCLOG("Node warning: setPhysicsBody sets anchor point to Vec2::ANCHOR_MIDDLE.");
+// MITKO:: Silence this for now
+//            CCLOG("Node warning: setPhysicsBody sets anchor point to Vec2::ANCHOR_MIDDLE.");
             setAnchorPoint(Vec2::ANCHOR_MIDDLE);
         }
     }

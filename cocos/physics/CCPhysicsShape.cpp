@@ -422,7 +422,8 @@ void PhysicsShapeCircle::setScale(float scaleX, float scaleY)
 {
     if (scaleX != scaleY)
     {
-        CCLOG("PhysicsShapeCircle WARNING: CANNOT support setScale with different x and y");
+// MITKO:: Silent this for now since i need them to be different
+//        CCLOG("PhysicsShapeCircle WARNING: CANNOT support setScale with different x and y");
     }
     
     if (_scaleX == scaleX)

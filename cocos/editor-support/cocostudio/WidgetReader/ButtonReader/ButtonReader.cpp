@@ -75,7 +75,6 @@ namespace cocostudio
         for (int i = 0; i < cocoNode->GetChildNum(); ++i) {
             std::string key = stChildArray[i].GetName(cocoLoader);
             std::string value = stChildArray[i].GetValue(cocoLoader);
-//            CCLOG("Button: key = %s, value = %d", key.c_str(), i);
 
             //read all basic properties of widget
             CC_BASIC_PROPERTY_BINARY_READER
@@ -250,30 +249,18 @@ namespace cocostudio
         
 		const protocolbuffers::ResourceData& normalDic = options.normaldata();
         int normalType = normalDic.resourcetype();
-		if (normalType == 1)
-		{
-			SpriteFrameCache::getInstance()->addSpriteFramesWithFile(protocolBuffersPath + normalDic.plistfile());			
-		}
         std::string normalTexturePath = this->getResourcePath(normalDic.path(), (Widget::TextureResType)normalType);		
         button->loadTextureNormal(normalTexturePath, (Widget::TextureResType)normalType);
         
         
         const protocolbuffers::ResourceData& pressedDic = options.presseddata();
         int pressedType = pressedDic.resourcetype();
-		if (pressedType == 1)
-		{
-			SpriteFrameCache::getInstance()->addSpriteFramesWithFile(protocolBuffersPath + pressedDic.plistfile());			
-		}
         std::string pressedTexturePath = this->getResourcePath(pressedDic.path(), (Widget::TextureResType)pressedType);
         button->loadTexturePressed(pressedTexturePath, (Widget::TextureResType)pressedType);
         
         
         const protocolbuffers::ResourceData& disabledDic = options.disableddata();
         int disabledType = disabledDic.resourcetype();
-		if (disabledType == 1)
-		{
-			SpriteFrameCache::getInstance()->addSpriteFramesWithFile(protocolBuffersPath + disabledDic.plistfile());			
-		}
         std::string disabledTexturePath = this->getResourcePath(disabledDic.path(), (Widget::TextureResType)disabledType);
         button->loadTextureDisabled(disabledTexturePath, (Widget::TextureResType)disabledType);
         
@@ -422,11 +409,11 @@ namespace cocostudio
             
             if (name == "Size" && scale9Enabled)
             {
-                const tinyxml2::XMLAttribute* attribute = child->FirstAttribute();
+                attribute = child->FirstAttribute();
                 
                 while (attribute)
                 {
-                    std::string name = attribute->Name();
+                    name = attribute->Name();
                     std::string value = attribute->Value();
                     
                     if (name == "X")
@@ -443,10 +430,10 @@ namespace cocostudio
             }
             else if (name == "CColor")
             {
-                const tinyxml2::XMLAttribute* attribute = child->FirstAttribute();
+                attribute = child->FirstAttribute();
                 while (attribute)
                 {
-                    std::string name = attribute->Name();
+                    name = attribute->Name();
                     std::string value = attribute->Value();
                     
                     if (name == "R")
@@ -467,10 +454,10 @@ namespace cocostudio
             }
             else if (name == "TextColor")
             {
-                const tinyxml2::XMLAttribute* attribute = child->FirstAttribute();
+                attribute = child->FirstAttribute();
                 while (attribute)
                 {
-                    std::string name = attribute->Name();
+                    name = attribute->Name();
                     std::string value = attribute->Value();
                     
                     if (name == "R")
@@ -491,13 +478,13 @@ namespace cocostudio
             }
             else if (name == "DisabledFileData")
             {
-                const tinyxml2::XMLAttribute* attribute = child->FirstAttribute();
+                attribute = child->FirstAttribute();
                 int resourceType = 0;
                 std::string path = "", plistFile = "";
                 
                 while (attribute)
                 {
-                    std::string name = attribute->Name();
+                    name = attribute->Name();
                     std::string value = attribute->Value();
                     
                     if (name == "Path")
@@ -537,13 +524,13 @@ namespace cocostudio
             }
             else if (name == "PressedFileData")
             {
-                const tinyxml2::XMLAttribute* attribute = child->FirstAttribute();
+                attribute = child->FirstAttribute();
                 int resourceType = 0;
                 std::string path = "", plistFile = "";
                 
                 while (attribute)
                 {
-                    std::string name = attribute->Name();
+                    name = attribute->Name();
                     std::string value = attribute->Value();
                     
                     if (name == "Path")
@@ -583,13 +570,13 @@ namespace cocostudio
             }
             else if (name == "NormalFileData")
             {
-                const tinyxml2::XMLAttribute* attribute = child->FirstAttribute();
+                attribute = child->FirstAttribute();
                 int resourceType = 0;
                 std::string path = "", plistFile = "";
                 
                 while (attribute)
                 {
-                    std::string name = attribute->Name();
+                    name = attribute->Name();
                     std::string value = attribute->Value();
                     
                     if (name == "Path")
@@ -629,13 +616,13 @@ namespace cocostudio
             }
             else if (name == "FontResource")
             {
-                const tinyxml2::XMLAttribute* attribute = child->FirstAttribute();
+                attribute = child->FirstAttribute();
                 int resourceType = 0;
                 std::string path = "", plistFile = "";
                 
                 while (attribute)
                 {
-                    std::string name = attribute->Name();
+                    name = attribute->Name();
                     std::string value = attribute->Value();
                     
                     if (name == "Path")

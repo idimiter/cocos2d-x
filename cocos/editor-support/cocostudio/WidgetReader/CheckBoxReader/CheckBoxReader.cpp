@@ -165,54 +165,34 @@ namespace cocostudio
         //load background image
 		const protocolbuffers::ResourceData& backGroundDic = options.backgroundboxdata();
         int backGroundType = backGroundDic.resourcetype();
-		if (backGroundType == 1)
-		{
-			SpriteFrameCache::getInstance()->addSpriteFramesWithFile(protocolBuffersPath + backGroundDic.plistfile());			
-		}
         std::string backGroundTexturePath = this->getResourcePath(backGroundDic.path(), (Widget::TextureResType)backGroundType);
         checkBox->loadTextureBackGround(backGroundTexturePath, (Widget::TextureResType)backGroundType);
         
         //load background selected image
         const protocolbuffers::ResourceData& backGroundSelectedDic = options.backgroundboxselecteddata();
         int backGroundSelectedType = backGroundSelectedDic.resourcetype();
-		if (backGroundSelectedType == 1)
-		{
-			SpriteFrameCache::getInstance()->addSpriteFramesWithFile(protocolBuffersPath + backGroundSelectedDic.plistfile());			
-		}
         std::string backGroundSelectedTexturePath = this->getResourcePath(backGroundSelectedDic.path(), (Widget::TextureResType)backGroundSelectedType);
         checkBox->loadTextureBackGroundSelected(backGroundSelectedTexturePath, (Widget::TextureResType)backGroundSelectedType);
         
         //load frontCross image
         const protocolbuffers::ResourceData& frontCrossDic = options.frontcrossdata();
         int frontCrossType = frontCrossDic.resourcetype();
-		if (frontCrossType == 1)
-		{
-			SpriteFrameCache::getInstance()->addSpriteFramesWithFile(protocolBuffersPath + frontCrossDic.plistfile());			
-		}
         std::string frontCrossFileName = this->getResourcePath(frontCrossDic.path(), (Widget::TextureResType)frontCrossType);
         checkBox->loadTextureFrontCross(frontCrossFileName, (Widget::TextureResType)frontCrossType);
         
         //load backGroundBoxDisabledData
         const protocolbuffers::ResourceData& backGroundDisabledDic = options.backgroundboxdisableddata();
         int backGroundDisabledType = backGroundDisabledDic.resourcetype();
-		if (backGroundDisabledType == 1)
-		{
-			SpriteFrameCache::getInstance()->addSpriteFramesWithFile(protocolBuffersPath + backGroundDisabledDic.plistfile());			
-		}
         std::string backGroundDisabledFileName = this->getResourcePath(backGroundDisabledDic.path(), (Widget::TextureResType)backGroundDisabledType);
         checkBox->loadTextureBackGroundDisabled(backGroundDisabledFileName, (Widget::TextureResType)backGroundDisabledType);
         
         ///load frontCrossDisabledData
         const protocolbuffers::ResourceData& frontCrossDisabledDic = options.frontcrossdisableddata();
         int frontCrossDisabledType = frontCrossDisabledDic.resourcetype();
-		if (frontCrossDisabledType == 1)
-		{
-			SpriteFrameCache::getInstance()->addSpriteFramesWithFile(protocolBuffersPath + frontCrossDisabledDic.plistfile());			
-		}
         std::string frontCrossDisabledFileName = this->getResourcePath(frontCrossDisabledDic.path(), (Widget::TextureResType)frontCrossDisabledType);
         checkBox->loadTextureFrontCrossDisabled(frontCrossDisabledFileName, (Widget::TextureResType)frontCrossDisabledType);
         
-        checkBox->setSelectedState(options.selectedstate());
+        checkBox->setSelected(options.selectedstate());
         
 		bool displaystate = true;
 		if(options.has_displaystate())
@@ -244,7 +224,7 @@ namespace cocostudio
             
             if (name == "CheckedState")
             {
-                checkBox->setSelectedState((value == "True") ? true : false);
+                checkBox->setSelected((value == "True") ? true : false);
             }
             else if (name == "DisplayState")
             {
@@ -266,13 +246,13 @@ namespace cocostudio
             
             if (name == "NormalBackFileData")
             {
-                const tinyxml2::XMLAttribute* attribute = child->FirstAttribute();
+                attribute = child->FirstAttribute();
                 int resourceType = 0;
                 std::string path = "", plistFile = "";
                 
                 while (attribute)
                 {
-                    std::string name = attribute->Name();
+                    name = attribute->Name();
                     std::string value = attribute->Value();
                     
                     if (name == "Path")
@@ -312,13 +292,13 @@ namespace cocostudio
             }
             else if (name == "PressedBackFileData")
             {
-                const tinyxml2::XMLAttribute* attribute = child->FirstAttribute();
+                attribute = child->FirstAttribute();
                 int resourceType = 0;
                 std::string path = "", plistFile = "";
                 
                 while (attribute)
                 {
-                    std::string name = attribute->Name();
+                    name = attribute->Name();
                     std::string value = attribute->Value();
                     
                     if (name == "Path")
@@ -358,13 +338,13 @@ namespace cocostudio
             }
             else if (name == "NodeNormalFileData")
             {
-                const tinyxml2::XMLAttribute* attribute = child->FirstAttribute();
+                attribute = child->FirstAttribute();
                 int resourceType = 0;
                 std::string path = "", plistFile = "";
                 
                 while (attribute)
                 {
-                    std::string name = attribute->Name();
+                    name = attribute->Name();
                     std::string value = attribute->Value();
                     
                     if (name == "Path")
@@ -404,13 +384,13 @@ namespace cocostudio
             }
             else if (name == "DisableBackFileData")
             {
-                const tinyxml2::XMLAttribute* attribute = child->FirstAttribute();
+                attribute = child->FirstAttribute();
                 int resourceType = 0;
                 std::string path = "", plistFile = "";
                 
                 while (attribute)
                 {
-                    std::string name = attribute->Name();
+                    name = attribute->Name();
                     std::string value = attribute->Value();
                     
                     if (name == "Path")
@@ -450,13 +430,13 @@ namespace cocostudio
             }
             else if (name == "NodeDisableFileData")
             {
-                const tinyxml2::XMLAttribute* attribute = child->FirstAttribute();
+                attribute = child->FirstAttribute();
                 int resourceType = 0;
                 std::string path = "", plistFile = "";
                 
                 while (attribute)
                 {
-                    std::string name = attribute->Name();
+                    name = attribute->Name();
                     std::string value = attribute->Value();
                     
                     if (name == "Path")

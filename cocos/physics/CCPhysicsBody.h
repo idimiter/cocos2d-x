@@ -276,7 +276,14 @@ public:
      * if the body it isn't enabled, it will not has simulation by world
      */
     void setEnable(bool enable);
-    
+
+	/**
+	 * set the enable value.
+	 * if ignore is enabled the body will not aply rotation
+	 */
+	void setIgnoreRotation(bool enable) {_ignoreRotation = enable; }
+
+
     /** whether the body can rotation */
     inline bool isRotationEnabled() const { return _rotationEnabled; }
     /** set the body is allow rotation or not */
@@ -324,6 +331,7 @@ protected:
     Vector<PhysicsShape*> _shapes;
     PhysicsWorld* _world;
     PhysicsBodyInfo* _info;
+	bool _ignoreRotation;
     bool _dynamic;
     bool _enabled;
     bool _rotationEnabled;

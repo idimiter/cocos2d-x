@@ -804,7 +804,8 @@ void PhysicsBody::update(float delta)
         _positionResetTag = true;
         _rotationResetTag = true;
         _node->setPosition(position);
-        _node->setRotation(rotation);
+		if (!_ignoreRotation)
+			_node->setRotation(rotation);
         _positionResetTag = false;
         _rotationResetTag = false;
         

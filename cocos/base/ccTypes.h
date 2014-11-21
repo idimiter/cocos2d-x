@@ -502,6 +502,17 @@ public:
     Acceleration(): x(0), y(0), z(0), timestamp(0) {}
 };
 
+
+enum class CC_DLL Orientation
+{
+	UNKNOWN,
+	PORTRAIT,
+	PORTRAIT_UPSIDEDOWN,
+	LANDSCAPE_LEFT,
+	LANDSCAPE_RIGHT
+};
+
+
 extern const std::string CC_DLL STD_STRING_EMPTY;
 extern const ssize_t CC_DLL CC_INVALID_INDEX;
 

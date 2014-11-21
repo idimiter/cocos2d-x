@@ -31,6 +31,7 @@
 #include "base/ccTypes.h"
 #include "base/CCEventDispatcher.h"
 #include "base/CCEventAcceleration.h"
+#include "base/CCEventOrientation.h"
 #include "base/CCDirector.h"
 #import <UIKit/UIKit.h>
 
@@ -69,6 +70,9 @@ static CCAccelerometerDispatcher* s_pAccelerometerDispatcher;
     if( (self = [super init]) ) {
         _acceleration = new cocos2d::Acceleration();
         _motionManager = [[CMMotionManager alloc] init];
+
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
+
     }
     return self;
 }
@@ -79,6 +83,41 @@ static CCAccelerometerDispatcher* s_pAccelerometerDispatcher;
     delete _acceleration;
     [_motionManager release];
     [super dealloc];
+
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void) deviceOrientationDidChange {
+	UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+	cocos2d::Orientation dir = cocos2d::Orientation::UNKNOWN;
+
+	switch (orientation)
+	{
+		default:
+		case UIDeviceOrientationUnknown:
+			break;
+
+		case UIDeviceOrientationPortrait:
+			dir = cocos2d::Orientation::PORTRAIT;
+			break;
+
+		case UIDeviceOrientationPortraitUpsideDown:
+			dir = cocos2d::Orientation::PORTRAIT_UPSIDEDOWN;
+			break;
+
+		case UIDeviceOrientationLandscapeLeft:
+			dir = cocos2d::Orientation::LANDSCAPE_LEFT;
+			break;
+
+		case UIDeviceOrientationLandscapeRight:
+			dir = cocos2d::Orientation::LANDSCAPE_RIGHT;
+			break;
+	}
+
+	cocos2d::EventOrientation event(dir);
+	auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
+	dispatcher->dispatchEvent(&event);
+
 }
 
 - (void) setAccelerometerEnabled: (bool) isEnabled

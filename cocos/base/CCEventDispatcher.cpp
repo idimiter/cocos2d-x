@@ -27,6 +27,7 @@
 #include "base/CCEventCustom.h"
 #include "base/CCEventListenerTouch.h"
 #include "base/CCEventListenerAcceleration.h"
+#include "base/CCEventListenerOrientation.h"
 #include "base/CCEventListenerMouse.h"
 #include "base/CCEventListenerKeyboard.h"
 #include "base/CCEventListenerCustom.h"
@@ -74,6 +75,9 @@ static EventListener::ListenerID __getListenerID(Event* event)
         case Event::Type::ACCELERATION:
             ret = EventListenerAcceleration::LISTENER_ID;
             break;
+		case Event::Type::ORIENTATION:
+			ret = EventListenerOrientation::LISTENER_ID;
+			break;
         case Event::Type::CUSTOM:
             {
                 auto customEvent = static_cast<EventCustom*>(event);

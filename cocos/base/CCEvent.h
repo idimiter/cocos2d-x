@@ -47,6 +47,7 @@ public:
         MOUSE,
         FOCUS,
         GAME_CONTROLLER,
+		ORIENTATION,
         CUSTOM
     };
     

@@ -1945,6 +1945,14 @@
 		B37510841823ACA100B3BA6A /* CCPhysicsShapeInfo_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B375104D1823AC7B00B3BA6A /* CCPhysicsShapeInfo_chipmunk.h */; };
 		B37510851823ACA100B3BA6A /* CCPhysicsWorldInfo_chipmunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B375104E1823AC7B00B3BA6A /* CCPhysicsWorldInfo_chipmunk.cpp */; };
 		B37510861823ACA100B3BA6A /* CCPhysicsWorldInfo_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B375104F1823AC7B00B3BA6A /* CCPhysicsWorldInfo_chipmunk.h */; };
+		B5A997431A1E27E7003CF670 /* CCEventListenerOrientation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5A997411A1E27E7003CF670 /* CCEventListenerOrientation.cpp */; };
+		B5A997441A1E27E7003CF670 /* CCEventListenerOrientation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5A997411A1E27E7003CF670 /* CCEventListenerOrientation.cpp */; };
+		B5A997451A1E27E7003CF670 /* CCEventListenerOrientation.h in Headers */ = {isa = PBXBuildFile; fileRef = B5A997421A1E27E7003CF670 /* CCEventListenerOrientation.h */; };
+		B5A997461A1E27E7003CF670 /* CCEventListenerOrientation.h in Headers */ = {isa = PBXBuildFile; fileRef = B5A997421A1E27E7003CF670 /* CCEventListenerOrientation.h */; };
+		B5A997491A1E28F0003CF670 /* CCEventOrientation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5A997471A1E28F0003CF670 /* CCEventOrientation.cpp */; };
+		B5A9974A1A1E28F0003CF670 /* CCEventOrientation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5A997471A1E28F0003CF670 /* CCEventOrientation.cpp */; };
+		B5A9974B1A1E28F0003CF670 /* CCEventOrientation.h in Headers */ = {isa = PBXBuildFile; fileRef = B5A997481A1E28F0003CF670 /* CCEventOrientation.h */; };
+		B5A9974C1A1E28F0003CF670 /* CCEventOrientation.h in Headers */ = {isa = PBXBuildFile; fileRef = B5A997481A1E28F0003CF670 /* CCEventOrientation.h */; };
 		B60C5BD419AC68B10056FBDE /* CCBillBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B60C5BD219AC68B10056FBDE /* CCBillBoard.cpp */; };
 		B60C5BD519AC68B10056FBDE /* CCBillBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B60C5BD219AC68B10056FBDE /* CCBillBoard.cpp */; };
 		B60C5BD619AC68B10056FBDE /* CCBillBoard.h in Headers */ = {isa = PBXBuildFile; fileRef = B60C5BD319AC68B10056FBDE /* CCBillBoard.h */; };
@@ -3009,6 +3017,10 @@
 		B375104F1823AC7B00B3BA6A /* CCPhysicsWorldInfo_chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCPhysicsWorldInfo_chipmunk.h; sourceTree = "<group>"; };
 		B3AF019E1842FBA400A98B85 /* b2MotorJoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2MotorJoint.cpp; sourceTree = "<group>"; };
 		B3AF019F1842FBA400A98B85 /* b2MotorJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2MotorJoint.h; sourceTree = "<group>"; };
+		B5A997411A1E27E7003CF670 /* CCEventListenerOrientation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCEventListenerOrientation.cpp; path = ../base/CCEventListenerOrientation.cpp; sourceTree = "<group>"; };
+		B5A997421A1E27E7003CF670 /* CCEventListenerOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCEventListenerOrientation.h; path = ../base/CCEventListenerOrientation.h; sourceTree = "<group>"; };
+		B5A997471A1E28F0003CF670 /* CCEventOrientation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCEventOrientation.cpp; path = ../base/CCEventOrientation.cpp; sourceTree = "<group>"; };
+		B5A997481A1E28F0003CF670 /* CCEventOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCEventOrientation.h; path = ../base/CCEventOrientation.h; sourceTree = "<group>"; };
 		B60C5BD219AC68B10056FBDE /* CCBillBoard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBillBoard.cpp; sourceTree = "<group>"; };
 		B60C5BD319AC68B10056FBDE /* CCBillBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBillBoard.h; sourceTree = "<group>"; };
 		B67C624319D4186F00F11FC6 /* ccShader_3D_ColorNormal.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ccShader_3D_ColorNormal.frag; sourceTree = "<group>"; };
@@ -3259,6 +3271,8 @@
 				50ABBDD51925AB6E00A911A9 /* CCEvent.h */,
 				50ABBDD61925AB6E00A911A9 /* CCEventAcceleration.cpp */,
 				50ABBDD71925AB6E00A911A9 /* CCEventAcceleration.h */,
+				B5A997471A1E28F0003CF670 /* CCEventOrientation.cpp */,
+				B5A997481A1E28F0003CF670 /* CCEventOrientation.h */,
 				50ABBDD81925AB6E00A911A9 /* CCEventCustom.cpp */,
 				50ABBDD91925AB6E00A911A9 /* CCEventCustom.h */,
 				50ABBDDA1925AB6E00A911A9 /* CCEventDispatcher.cpp */,
@@ -3271,6 +3285,8 @@
 				50ABBDE11925AB6E00A911A9 /* CCEventListener.h */,
 				50ABBDE21925AB6E00A911A9 /* CCEventListenerAcceleration.cpp */,
 				50ABBDE31925AB6E00A911A9 /* CCEventListenerAcceleration.h */,
+				B5A997411A1E27E7003CF670 /* CCEventListenerOrientation.cpp */,
+				B5A997421A1E27E7003CF670 /* CCEventListenerOrientation.h */,
 				50ABBDE41925AB6E00A911A9 /* CCEventListenerCustom.cpp */,
 				50ABBDE51925AB6E00A911A9 /* CCEventListenerCustom.h */,
 				50ABBDE61925AB6E00A911A9 /* CCEventListenerFocus.cpp */,
@@ -5231,6 +5247,7 @@
 				50ABBE811925AB6F00A911A9 /* CCEventType.h in Headers */,
 				1A57008F180BC5A10088DEC7 /* CCActionTiledGrid.h in Headers */,
 				15AE19A319AAD39600C27E9E /* TextBMFontReader.h in Headers */,
+				B5A997451A1E27E7003CF670 /* CCEventListenerOrientation.h in Headers */,
 				15AE191219AAD35000C27E9E /* CCProcessBase.h in Headers */,
 				15AE1BB619AADFEF00C27E9E /* SocketIO.h in Headers */,
 				1A570093180BC5A10088DEC7 /* CCActionTween.h in Headers */,
@@ -5401,6 +5418,7 @@
 				15AE1B4E19AADA9900C27E9E /* UIListView.h in Headers */,
 				1A570284180BCC900088DEC7 /* CCSpriteBatchNode.h in Headers */,
 				5034CA2B191D591100CE6051 /* ccShader_PositionTextureA8Color.vert in Headers */,
+				B5A9974B1A1E28F0003CF670 /* CCEventOrientation.h in Headers */,
 				15AE1BCE19AAE01E00C27E9E /* CCControlColourPicker.h in Headers */,
 				1A570288180BCC900088DEC7 /* CCSpriteFrame.h in Headers */,
 				15AE189519AAD33D00C27E9E /* CCLayerLoader.h in Headers */,
@@ -5825,6 +5843,7 @@
 				50ABBFFE1926664800A911A9 /* CCFileUtils-apple.h in Headers */,
 				15AE1AAD19AAD40300C27E9E /* b2WorldCallbacks.h in Headers */,
 				1A5701A4180BCB590088DEC7 /* CCFontAtlas.h in Headers */,
+				B5A997461A1E27E7003CF670 /* CCEventListenerOrientation.h in Headers */,
 				15AE1C0219AAE01E00C27E9E /* CCScrollView.h in Headers */,
 				1A5701A8180BCB590088DEC7 /* CCFontAtlasCache.h in Headers */,
 				15AE1A4C19AAD3D500C27E9E /* b2EdgeShape.h in Headers */,
@@ -6073,6 +6092,7 @@
 				50ABC0081926664800A911A9 /* CCApplicationProtocol.h in Headers */,
 				1ABA68B11888D700007D1BB4 /* CCFontCharMap.h in Headers */,
 				3828C0BC19EB8ACA002AB57B /* atomicops_internals_arm_gcc.h in Headers */,
+				B5A9974C1A1E28F0003CF670 /* CCEventOrientation.h in Headers */,
 				15AE1ACF19AAD40300C27E9E /* b2PulleyJoint.h in Headers */,
 				15AE198019AAD35700C27E9E /* CCTimeLine.h in Headers */,
 				38B8E2D219E65F4C002D7CE7 /* CSParseBinary.pb.h in Headers */,
@@ -6495,6 +6515,7 @@
 				50ABBE351925AB6F00A911A9 /* CCConsole.cpp in Sources */,
 				15AE1BB119AADFEF00C27E9E /* HttpClient.cpp in Sources */,
 				50ABBEAF1925AB6F00A911A9 /* CCUserDefault.cpp in Sources */,
+				B5A997431A1E27E7003CF670 /* CCEventListenerOrientation.cpp in Sources */,
 				15AE1BCB19AAE01E00C27E9E /* CCControlButton.cpp in Sources */,
 				50ABBE791925AB6F00A911A9 /* CCEventMouse.cpp in Sources */,
 				15AE1A2E19AAD3D500C27E9E /* b2TimeOfImpact.cpp in Sources */,
@@ -6654,6 +6675,7 @@
 				50ABBE9F1925AB6F00A911A9 /* CCScheduler.cpp in Sources */,
 				15AE1C1119AAE2C600C27E9E /* CCPhysicsDebugNode.cpp in Sources */,
 				50ABC0151926664800A911A9 /* CCImage.cpp in Sources */,
+				B5A997491A1E28F0003CF670 /* CCEventOrientation.cpp in Sources */,
 				50ABBE231925AB6F00A911A9 /* base64.cpp in Sources */,
 				15AE1B5D19AADA9900C27E9E /* UITextBMFont.cpp in Sources */,
 				15AE1BB519AADFEF00C27E9E /* SocketIO.cpp in Sources */,
@@ -6720,6 +6742,7 @@
 				15AE1AAC19AAD40300C27E9E /* b2WorldCallbacks.cpp in Sources */,
 				15AE18C719AAD33D00C27E9E /* CCMenuItemImageLoader.cpp in Sources */,
 				50ABC01A1926664800A911A9 /* CCSAXParser.cpp in Sources */,
+				B5A9974A1A1E28F0003CF670 /* CCEventOrientation.cpp in Sources */,
 				B29A7E1C19EE1B7700872B35 /* SkeletonJson.c in Sources */,
 				B2CC507C19776DD10041958E /* CCPhysicsJoint.cpp in Sources */,
 				38B8E2E219E671D2002D7CE7 /* UILayoutComponent.cpp in Sources */,
@@ -6945,6 +6968,7 @@
 				15AE19B419AAD39700C27E9E /* TextAtlasReader.cpp in Sources */,
 				15AE194019AAD35100C27E9E /* CCBone.cpp in Sources */,
 				1A570215180BCBF40088DEC7 /* CCRenderTexture.cpp in Sources */,
+				B5A997441A1E27E7003CF670 /* CCEventListenerOrientation.cpp in Sources */,
 				1A570222180BCC1A0088DEC7 /* CCParticleBatchNode.cpp in Sources */,
 				292DB15019B4574100A80320 /* UIEditBoxImpl-stub.cpp in Sources */,
 				15AE185F19AAD31200C27E9E /* SimpleAudioEngine.mm in Sources */,

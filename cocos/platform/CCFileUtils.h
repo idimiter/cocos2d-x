@@ -246,7 +246,7 @@ public:
      *  @since v2.1
      *  @lua NA
      */
-    virtual const std::vector<std::string>& getSearchResolutionsOrder();
+    virtual const std::vector<std::string>& getSearchResolutionsOrder() const;
     
     /** 
      *  Sets the array of search paths.

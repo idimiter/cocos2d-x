@@ -724,12 +724,12 @@ std::string FileUtils::getPathForFilename(const std::string& filename, const std
     return path;
 }
 
-//std::string FileUtils::getPathFromFilename(const std::string &filename)
-//{
-//	size_t pos = filename.find_last_of("/");
-//
-//	return filename.substr(0, pos + 1);
-//}
+std::string FileUtils::getPathFromFilename(const std::string &filename)
+{
+	size_t pos = filename.find_last_of("/");
+
+	return filename.substr(0, pos + 1);
+}
 
 
 std::string FileUtils::fullPathForFilename(const std::string &filename)

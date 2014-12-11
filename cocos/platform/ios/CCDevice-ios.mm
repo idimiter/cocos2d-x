@@ -43,6 +43,8 @@
 {
     cocos2d::Acceleration *_acceleration;
     CMMotionManager *_motionManager;
+
+	UIDeviceOrientation lastOrientation;
 }
 
 + (id) sharedAccelerometerDispather;
@@ -72,7 +74,6 @@ static CCAccelerometerDispatcher* s_pAccelerometerDispatcher;
         _motionManager = [[CMMotionManager alloc] init];
 
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
-
     }
     return self;
 }
@@ -89,13 +90,16 @@ static CCAccelerometerDispatcher* s_pAccelerometerDispatcher;
 
 -(void) deviceOrientationDidChange {
 	UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+
+	if (orientation == lastOrientation)
+		return;
+
+	lastOrientation = orientation;
+
 	cocos2d::Orientation dir = cocos2d::Orientation::UNKNOWN;
 
 	switch (orientation)
 	{
-		default:
-		case UIDeviceOrientationUnknown:
-			break;
 
 		case UIDeviceOrientationPortrait:
 			dir = cocos2d::Orientation::PORTRAIT;
@@ -112,6 +116,11 @@ static CCAccelerometerDispatcher* s_pAccelerometerDispatcher;
 		case UIDeviceOrientationLandscapeRight:
 			dir = cocos2d::Orientation::LANDSCAPE_RIGHT;
 			break;
+
+		default:
+		case UIDeviceOrientationUnknown:
+			return;
+
 	}
 
 	cocos2d::EventOrientation event(dir);

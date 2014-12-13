@@ -104,6 +104,8 @@ LanguageType Application::getCurrentLanguage()
     NSDictionary* temp = [NSLocale componentsFromLocaleIdentifier:currentLanguage];
     NSString * languageCode = [temp objectForKey:NSLocaleLanguageCode];
 
+	NSLog(@"Current lang:: %@", languageCode);
+
     LanguageType ret = LanguageType::ENGLISH;
     if ([languageCode isEqualToString:@"zh"])
     {
@@ -151,7 +153,10 @@ LanguageType Application::getCurrentLanguage()
     }
     else if ([languageCode isEqualToString:@"pl"]){
         ret = LanguageType::POLISH;
-    }
+	} else if ([languageCode isEqualToString:@"bg"]){
+		ret = LanguageType::BULGARIAN;
+	}
+
     return ret;
 }
 

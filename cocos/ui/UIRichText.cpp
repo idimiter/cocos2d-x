@@ -285,6 +285,7 @@ void RichText::handleTextRenderer(const std::string& text, const std::string& fo
         int leftLength = stringLength * (1.0f - overstepPercent);
         std::string leftWords = Helper::getSubStringOfUTF8String(curText,0,leftLength);
         std::string cutWords = Helper::getSubStringOfUTF8String(curText, leftLength, stringLength - leftLength);
+
         if (leftLength > 0)
         {
             Label* leftRenderer = nullptr;
@@ -303,8 +304,14 @@ void RichText::handleTextRenderer(const std::string& text, const std::string& fo
                 pushToContainer(leftRenderer);
             }
         }
+#warning FIX RECURSION TO ADD NEW LINE __ONLY__ FOR SPACE CHARACTERS
+//		CCLOG("cutWords.c_str(): |%s| (%lu) [%c]", cutWords.c_str(), stringLength - leftLength, cutWords.c_str()[0]);
+//		if (isspace(cutWords.c_str()[0]) == 0)
+//			_leftSpaceWidth = _customSize.width;
+//		else
+//			addNewLine();
 
-        addNewLine();
+		addNewLine();
         handleTextRenderer(cutWords.c_str(), fontName, fontSize, color, opacity);
     }
     else

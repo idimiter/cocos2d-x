@@ -1028,7 +1028,10 @@ void EventDispatcher::dispatchTouchEvent(EventTouch* event)
 void EventDispatcher::updateListeners(Event* event)
 {
     CCASSERT(_inDispatch > 0, "If program goes here, there should be event in dispatch.");
-    
+
+    if (_inDispatch > 1)
+        return;
+
     auto onUpdateListeners = [this](const EventListener::ListenerID& listenerID)
     {
         auto listenersIter = _listenerMap.find(listenerID);
@@ -1085,7 +1088,6 @@ void EventDispatcher::updateListeners(Event* event)
         }
     };
 
-    
     if (event->getType() == Event::Type::TOUCH)
     {
         onUpdateListeners(EventListenerTouchOneByOne::LISTENER_ID);
@@ -1095,9 +1097,6 @@ void EventDispatcher::updateListeners(Event* event)
     {
         onUpdateListeners(__getListenerID(event));
     }
-    
-    if (_inDispatch > 1)
-        return;
     
     CCASSERT(_inDispatch == 1, "_inDispatch should be 1 here.");
     

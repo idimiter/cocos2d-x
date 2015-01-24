@@ -206,18 +206,15 @@ LanguageType Application::getCurrentLanguage()
     else if ([languageCode isEqualToString:@"pl"]){
         ret = LanguageType::POLISH;
     }
-<<<<<<< HEAD
 	else if ([languageCode isEqualToString:@"bg"]){
 		ret = LanguageType::BULGARIAN;
 	}
-=======
     else if ([languageCode isEqualToString:@"tr"]){
         ret = LanguageType::TURKISH;
     }
     else if ([languageCode isEqualToString:@"uk"]){
         ret = LanguageType::UKRAINIAN;
     }
->>>>>>> main/v3
     return ret;
 }
 

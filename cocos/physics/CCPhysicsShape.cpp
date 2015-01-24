@@ -375,24 +375,7 @@ Vec2 PhysicsShapeCircle::getOffset()
 
 void PhysicsShapeCircle::updateScale()
 {
-<<<<<<< HEAD
-    if (scaleX != scaleY)
-    {
-// MITKO:: Silent this for now since i need them to be different
-//        CCLOG("PhysicsShapeCircle WARNING: CANNOT support setScale with different x and y");
-    }
-    
-    if (_scaleX == scaleX)
-    {
-        return;
-    }
-    
-    _newScaleX = _newScaleY = scaleX;
-    _dirty = true;
-}
-=======
     cpFloat factor = std::abs(PhysicsHelper::float2cpfloat(_newScaleX / _scaleX));
->>>>>>> main/v3
 
     cpShape* shape = _cpShapes.front();
     cpVect v = cpCircleShapeGetOffset(shape);

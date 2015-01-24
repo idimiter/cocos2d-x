@@ -763,32 +763,6 @@ void PhysicsBody::update(float delta)
 {
     if (_node)
     {
-<<<<<<< HEAD
-        for (auto shape : _shapes)
-        {
-            shape->update(delta);
-        }
-        
-        Node* parent = _node->getParent();
-        Node* scene = &_world->getScene();
-        
-        Vec2 position = parent != scene ? parent->convertToNodeSpace(scene->convertToWorldSpace(getPosition())) : getPosition();
-        float rotation = getRotation();
-        for (; parent != scene; parent = parent->getParent())
-        {
-            rotation -= parent->getRotation();
-        }
-        
-        _positionResetTag = true;
-        _rotationResetTag = true;
-        _node->setPosition(position);
-		if (!_ignoreRotation)
-			_node->setRotation(rotation);
-        _positionResetTag = false;
-        _rotationResetTag = false;
-        
-=======
->>>>>>> main/v3
         // damping compute
         if (_isDamping && _dynamic && !isResting())
         {

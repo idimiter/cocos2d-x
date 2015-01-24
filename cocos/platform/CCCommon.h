@@ -65,12 +65,9 @@ enum class LanguageType
     ARABIC,
     NORWEGIAN,
     POLISH,
-<<<<<<< HEAD
-	BULGARIAN
-=======
+	BULGARIAN,
     TURKISH,
     UKRAINIAN
->>>>>>> main/v3
 };
 
 // END of platform group

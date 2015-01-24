@@ -103,14 +103,8 @@ LanguageType Application::getCurrentLanguage()
     // get the current language code.(such as English is "en", Chinese is "zh" and so on)
     NSDictionary* temp = [NSLocale componentsFromLocaleIdentifier:currentLanguage];
     NSString * languageCode = [temp objectForKey:NSLocaleLanguageCode];
-<<<<<<< HEAD
 
-	NSLog(@"Current lang:: %@", languageCode);
-
-=======
-    
->>>>>>> main/v3
-    LanguageType ret = LanguageType::ENGLISH;
+	LanguageType ret = LanguageType::ENGLISH;
     if ([languageCode isEqualToString:@"zh"])
     {
         ret = LanguageType::CHINESE;
@@ -157,12 +151,8 @@ LanguageType Application::getCurrentLanguage()
     }
     else if ([languageCode isEqualToString:@"pl"]){
         ret = LanguageType::POLISH;
-<<<<<<< HEAD
 	} else if ([languageCode isEqualToString:@"bg"]){
 		ret = LanguageType::BULGARIAN;
-	}
-
-=======
     }
     else if ([languageCode isEqualToString:@"tr"]){
         ret = LanguageType::TURKISH;
@@ -170,8 +160,8 @@ LanguageType Application::getCurrentLanguage()
     else if ([languageCode isEqualToString:@"uk"]){
         ret = LanguageType::UKRAINIAN;
     }
->>>>>>> main/v3
-    return ret;
+
+	return ret;
 }
 
 Application::Platform Application::getTargetPlatform()

@@ -277,6 +277,7 @@ void RichText::handleTextRenderer(const std::string& text, const std::string& fo
     }
     float textRendererWidth = textRenderer->getContentSize().width;
     _leftSpaceWidth -= textRendererWidth;
+
     if (_leftSpaceWidth < 0.0f)
     {
         float overstepPercent = (-_leftSpaceWidth) / textRendererWidth;
@@ -285,6 +286,13 @@ void RichText::handleTextRenderer(const std::string& text, const std::string& fo
         int leftLength = stringLength * (1.0f - overstepPercent);
         std::string leftWords = Helper::getSubStringOfUTF8String(curText,0,leftLength);
         std::string cutWords = Helper::getSubStringOfUTF8String(curText, leftLength, stringLength - leftLength);
+
+		// Fix to wrap text on new space character
+		size_t rightIndex = leftWords.find_last_of(' ');
+		std::string rightWords = leftWords.substr(rightIndex + 1, leftWords.length());
+		leftWords = leftWords.substr(0, rightIndex);
+
+		cutWords = rightWords + cutWords;
 
         if (leftLength > 0)
         {
@@ -304,12 +312,6 @@ void RichText::handleTextRenderer(const std::string& text, const std::string& fo
                 pushToContainer(leftRenderer);
             }
         }
-#warning FIX RECURSION TO ADD NEW LINE __ONLY__ FOR SPACE CHARACTERS
-//		CCLOG("cutWords.c_str(): |%s| (%lu) [%c]", cutWords.c_str(), stringLength - leftLength, cutWords.c_str()[0]);
-//		if (isspace(cutWords.c_str()[0]) == 0)
-//			_leftSpaceWidth = _customSize.width;
-//		else
-//			addNewLine();
 
 		addNewLine();
         handleTextRenderer(cutWords.c_str(), fontName, fontSize, color, opacity);

@@ -277,7 +277,6 @@ void RichText::handleTextRenderer(const std::string& text, const std::string& fo
     }
     float textRendererWidth = textRenderer->getContentSize().width;
     _leftSpaceWidth -= textRendererWidth;
-
     if (_leftSpaceWidth < 0.0f)
     {
         float overstepPercent = (-_leftSpaceWidth) / textRendererWidth;
@@ -288,11 +287,11 @@ void RichText::handleTextRenderer(const std::string& text, const std::string& fo
         std::string cutWords = Helper::getSubStringOfUTF8String(curText, leftLength, stringLength - leftLength);
 
 		// Fix to wrap text on new space character
-		size_t rightIndex = leftWords.find_last_of(' ');
-		std::string rightWords = leftWords.substr(rightIndex + 1, leftWords.length());
-		leftWords = leftWords.substr(0, rightIndex);
+        size_t rightIndex = leftWords.find_last_of(' ');
+        std::string rightWords = leftWords.substr(rightIndex + 1, leftWords.length());
+        leftWords = leftWords.substr(0, rightIndex);
 
-		cutWords = rightWords + cutWords;
+        cutWords = rightWords + cutWords;
 
         if (leftLength > 0)
         {

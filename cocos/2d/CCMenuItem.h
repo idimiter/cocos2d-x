@@ -90,6 +90,13 @@ public:
     * @lua NA
     */
     void setCallback(const ccMenuCallback& callback);
+	/** set the callback to the menu item when item is selected
+	 * @code
+	 * In js,can contain two params,the second param is jsptr
+	 * @endcode
+	 * @lua NA
+	 */
+	void setSelectCallback(const ccMenuCallback& callback);
     /** set the target/selector of the menu item
     * @js NA
     * @lua NA
@@ -130,6 +137,7 @@ protected:
     bool            _selected;
     bool            _enabled;
 	// callback
+	ccMenuCallback _callback_select;
 	ccMenuCallback _callback;
 	// If using the old API, the _target needs to be retained / released
 	Ref		*_target;

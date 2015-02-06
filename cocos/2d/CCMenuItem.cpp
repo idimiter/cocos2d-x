@@ -108,6 +108,9 @@ void MenuItem::onExit()
 void MenuItem::selected()
 {
     _selected = true;
+
+	if (_callback_select)
+		_callback_select(this);
 }
 
 void MenuItem::unselected()
@@ -167,6 +170,11 @@ void MenuItem::setTarget(Ref *target, SEL_MenuHandler selector)
 void MenuItem::setCallback(const ccMenuCallback& callback)
 {
     _callback = callback;
+}
+
+void MenuItem::setSelectCallback(const ccMenuCallback& callback)
+{
+	_callback_select = callback;
 }
 
 std::string MenuItem::getDescription() const

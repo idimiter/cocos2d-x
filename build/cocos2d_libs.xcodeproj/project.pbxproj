@@ -1928,28 +1928,6 @@
 		B29A7E3F19EE1B7700872B35 /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = B29A7DC619EE1B7700872B35 /* AnimationState.h */; };
 		B29A7E4019EE1B7700872B35 /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = B29A7DC619EE1B7700872B35 /* AnimationState.h */; };
 		B2CC507C19776DD10041958E /* CCPhysicsJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46A170721807CE7A005B8026 /* CCPhysicsJoint.cpp */; };
-		B37510711823AC9F00B3BA6A /* CCPhysicsBodyInfo_chipmunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B37510451823AC7B00B3BA6A /* CCPhysicsBodyInfo_chipmunk.cpp */; };
-		B37510721823AC9F00B3BA6A /* CCPhysicsBodyInfo_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B37510461823AC7B00B3BA6A /* CCPhysicsBodyInfo_chipmunk.h */; };
-		B37510731823AC9F00B3BA6A /* CCPhysicsContactInfo_chipmunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B37510471823AC7B00B3BA6A /* CCPhysicsContactInfo_chipmunk.cpp */; };
-		B37510741823AC9F00B3BA6A /* CCPhysicsContactInfo_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B37510481823AC7B00B3BA6A /* CCPhysicsContactInfo_chipmunk.h */; };
-		B37510751823AC9F00B3BA6A /* CCPhysicsHelper_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B37510491823AC7B00B3BA6A /* CCPhysicsHelper_chipmunk.h */; };
-		B37510761823AC9F00B3BA6A /* CCPhysicsJointInfo_chipmunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B375104A1823AC7B00B3BA6A /* CCPhysicsJointInfo_chipmunk.cpp */; };
-		B37510771823AC9F00B3BA6A /* CCPhysicsJointInfo_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B375104B1823AC7B00B3BA6A /* CCPhysicsJointInfo_chipmunk.h */; };
-		B37510781823AC9F00B3BA6A /* CCPhysicsShapeInfo_chipmunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B375104C1823AC7B00B3BA6A /* CCPhysicsShapeInfo_chipmunk.cpp */; };
-		B37510791823AC9F00B3BA6A /* CCPhysicsShapeInfo_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B375104D1823AC7B00B3BA6A /* CCPhysicsShapeInfo_chipmunk.h */; };
-		B375107A1823AC9F00B3BA6A /* CCPhysicsWorldInfo_chipmunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B375104E1823AC7B00B3BA6A /* CCPhysicsWorldInfo_chipmunk.cpp */; };
-		B375107B1823AC9F00B3BA6A /* CCPhysicsWorldInfo_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B375104F1823AC7B00B3BA6A /* CCPhysicsWorldInfo_chipmunk.h */; };
-		B375107C1823ACA100B3BA6A /* CCPhysicsBodyInfo_chipmunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B37510451823AC7B00B3BA6A /* CCPhysicsBodyInfo_chipmunk.cpp */; };
-		B375107D1823ACA100B3BA6A /* CCPhysicsBodyInfo_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B37510461823AC7B00B3BA6A /* CCPhysicsBodyInfo_chipmunk.h */; };
-		B375107E1823ACA100B3BA6A /* CCPhysicsContactInfo_chipmunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B37510471823AC7B00B3BA6A /* CCPhysicsContactInfo_chipmunk.cpp */; };
-		B375107F1823ACA100B3BA6A /* CCPhysicsContactInfo_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B37510481823AC7B00B3BA6A /* CCPhysicsContactInfo_chipmunk.h */; };
-		B37510801823ACA100B3BA6A /* CCPhysicsHelper_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B37510491823AC7B00B3BA6A /* CCPhysicsHelper_chipmunk.h */; };
-		B37510811823ACA100B3BA6A /* CCPhysicsJointInfo_chipmunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B375104A1823AC7B00B3BA6A /* CCPhysicsJointInfo_chipmunk.cpp */; };
-		B37510821823ACA100B3BA6A /* CCPhysicsJointInfo_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B375104B1823AC7B00B3BA6A /* CCPhysicsJointInfo_chipmunk.h */; };
-		B37510831823ACA100B3BA6A /* CCPhysicsShapeInfo_chipmunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B375104C1823AC7B00B3BA6A /* CCPhysicsShapeInfo_chipmunk.cpp */; };
-		B37510841823ACA100B3BA6A /* CCPhysicsShapeInfo_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B375104D1823AC7B00B3BA6A /* CCPhysicsShapeInfo_chipmunk.h */; };
-		B37510851823ACA100B3BA6A /* CCPhysicsWorldInfo_chipmunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B375104E1823AC7B00B3BA6A /* CCPhysicsWorldInfo_chipmunk.cpp */; };
-		B37510861823ACA100B3BA6A /* CCPhysicsWorldInfo_chipmunk.h in Headers */ = {isa = PBXBuildFile; fileRef = B375104F1823AC7B00B3BA6A /* CCPhysicsWorldInfo_chipmunk.h */; };
 		B5A997431A1E27E7003CF670 /* CCEventListenerOrientation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5A997411A1E27E7003CF670 /* CCEventListenerOrientation.cpp */; };
 		B5A997441A1E27E7003CF670 /* CCEventListenerOrientation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5A997411A1E27E7003CF670 /* CCEventListenerOrientation.cpp */; };
 		B5A997451A1E27E7003CF670 /* CCEventListenerOrientation.h in Headers */ = {isa = PBXBuildFile; fileRef = B5A997421A1E27E7003CF670 /* CCEventListenerOrientation.h */; };
@@ -2848,7 +2826,7 @@
 		50ABBDFC1925AB6E00A911A9 /* CCProfiling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCProfiling.h; path = ../base/CCProfiling.h; sourceTree = "<group>"; };
 		50ABBDFD1925AB6E00A911A9 /* CCProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCProtocols.h; path = ../base/CCProtocols.h; sourceTree = "<group>"; };
 		50ABBDFE1925AB6E00A911A9 /* CCRef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCRef.cpp; path = ../base/CCRef.cpp; sourceTree = "<group>"; };
-		50ABBDFF1925AB6E00A911A9 /* CCRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRef.h; path = ../base/CCRef.h; sourceTree = "<group>"; };
+		50ABBDFF1925AB6E00A911A9 /* CCRef.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = CCRef.h; path = ../base/CCRef.h; sourceTree = "<group>"; };
 		50ABBE001925AB6E00A911A9 /* CCRefPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRefPtr.h; path = ../base/CCRefPtr.h; sourceTree = "<group>"; };
 		50ABBE011925AB6E00A911A9 /* CCScheduler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCScheduler.cpp; path = ../base/CCScheduler.cpp; sourceTree = "<group>"; };
 		50ABBE021925AB6E00A911A9 /* CCScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCScheduler.h; path = ../base/CCScheduler.h; sourceTree = "<group>"; };
@@ -6223,7 +6201,6 @@
 				38B8E2D819E66581002D7CE7 /* CSLoader.h in Headers */,
 				50ABC0081926664800A911A9 /* CCApplicationProtocol.h in Headers */,
 				1ABA68B11888D700007D1BB4 /* CCFontCharMap.h in Headers */,
-				3828C0BC19EB8ACA002AB57B /* atomicops_internals_arm_gcc.h in Headers */,
 				B5A9974C1A1E28F0003CF670 /* CCEventOrientation.h in Headers */,
 				15AE1ACF19AAD40300C27E9E /* b2PulleyJoint.h in Headers */,
 				D0FD03601A3B51AA00825BB5 /* CCAllocatorStrategyPool.h in Headers */,

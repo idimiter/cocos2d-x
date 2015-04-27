@@ -117,12 +117,14 @@ base/CCEventController.cpp \
 base/CCEventListener.cpp \
 base/CCEventListenerController.cpp \
 base/CCEventListenerAcceleration.cpp \
+base/CCEventListenerOrientation.cpp \
 base/CCEventListenerCustom.cpp \
 base/CCEventListenerFocus.cpp \
 base/CCEventListenerKeyboard.cpp \
 base/CCEventListenerMouse.cpp \
 base/CCEventListenerTouch.cpp \
 base/CCEventMouse.cpp \
+base/CCEventOrientation.cpp \
 base/CCEventTouch.cpp \
 base/CCIMEDispatcher.cpp \
 base/CCNS.cpp \

@@ -55,7 +55,8 @@ public:
         ACCELERATION,
         FOCUS,
 		GAME_CONTROLLER,
-        CUSTOM
+        CUSTOM,
+		ORIENTATION
     };
 
     typedef std::string ListenerID;

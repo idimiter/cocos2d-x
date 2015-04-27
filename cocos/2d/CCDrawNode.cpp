@@ -840,7 +840,7 @@ void DrawNode::drawPolygon(const Vec2 *verts, int count, const Color4F &fillColo
     }
     
     _bufferCount += vertex_count;
-    
+
     _dirty = true;
 }
 

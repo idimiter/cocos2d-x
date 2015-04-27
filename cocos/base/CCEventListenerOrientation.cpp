@@ -61,7 +61,7 @@ bool EventListenerOrientation::init(const std::function<void(Orientation, Event*
         this->onOrientationEvent(dirEvent->_direction, event);
     };
     
-    if (EventListener::init(Type::ACCELERATION, LISTENER_ID, listener))
+    if (EventListener::init(Type::ORIENTATION, LISTENER_ID, listener))
     {
         onOrientationEvent = callback;
         return true;

@@ -132,6 +132,12 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
     if (!self.uiWebView) {
         self.uiWebView = [[[UIWebView alloc] init] autorelease];
         self.uiWebView.delegate = self;
+
+		// FreakyBalls specific settings (Should be removed and implemented properly)
+		[self.uiWebView setBackgroundColor:[UIColor colorWithRed:0.109375 green:0.140625 blue:0.3515625 alpha:1]];
+		[self.uiWebView setOpaque:NO];
+		[self.uiWebView.scrollView setBounces:NO];
+		// FreakyBalls specific settings
     }
     if (!self.uiWebView.superview) {
         auto view = cocos2d::Director::getInstance()->getOpenGLView();
@@ -170,7 +176,7 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
 - (void)loadUrl:(const std::string &)urlString {
     if (!self.uiWebView) {[self setupWebView];}
     NSURL *url = [NSURL URLWithString:@(urlString.c_str())];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10.0];
     [self.uiWebView loadRequest:request];
 }
 

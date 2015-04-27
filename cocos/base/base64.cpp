@@ -143,6 +143,7 @@ int base64Decode(const unsigned char *in, unsigned int inLength, unsigned char *
     
     //should be enough to store 6-bit buffers in 8-bit buffers
     *out = (unsigned char*)malloc(inLength * 3.0f / 4.0f + 1);
+	bzero(*out, inLength * 3.0f / 4.0f + 1);
     if( *out ) {
         int ret = _base64Decode(in, inLength, *out, &outLength);
         
@@ -164,6 +165,7 @@ int base64Encode(const unsigned char *in, unsigned int inLength, char **out) {
     
     //should be enough to store 8-bit buffers in 6-bit buffers
     *out = (char*)malloc(outLength+1);
+	bzero(*out, outLength + 1);
     if( *out ) {
         _base64Encode(in, inLength, *out);
     }

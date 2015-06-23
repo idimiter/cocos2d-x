@@ -822,9 +822,9 @@ void ScrollView::onTouchCancelled(Touch* touch, Event* event)
 
 Rect ScrollView::getViewRect()
 {
-//	Vec2 screenPos = convertToWorldSpace(Vec2::ZERO);
-	Vec2 screenPos = Director::getInstance()->convertToUI(getBoundingBox().origin);
-		 screenPos = Vec2(floor(screenPos.x), floor(screenPos.y - Director::getInstance()->getVisibleSize().height));
+	Vec2 screenPos = convertToWorldSpace(Vec2::ZERO);
+//	Vec2 screenPos = Director::getInstance()->convertToUI(getBoundingBox().origin);
+//		 screenPos = Vec2(floor(screenPos.x), floor(screenPos.y - Director::getInstance()->getVisibleSize().height));
 
 //	Vec2 cPos = convertToWorldSpace(getBoundingBox().origin);
 //	CCLOG("%fx%f : %fx%f", screenPos.x, screenPos.y, cPos.x, cPos.y);

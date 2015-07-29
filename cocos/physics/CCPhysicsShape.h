@@ -69,7 +69,7 @@ public:
         UNKNOWN,
         CIRCLE,
         BOX,
-        POLYGEN,
+        POLYGON,
         EDGESEGMENT,
         EDGEBOX,
         EDGEPOLYGEN,

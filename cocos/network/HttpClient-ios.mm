@@ -158,8 +158,7 @@ static int processTask(HttpRequest *request, NSString* requestType, void *stream
 {
     //create request with url
     NSString* urlstring = [NSString stringWithUTF8String:request->getUrl()];
-    NSURL *url = [NSURL URLWithString:urlstring];
-
+    NSURL *url = [NSURL URLWithString:[urlstring stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest *nsrequest = [NSMutableURLRequest requestWithURL:url
                                                cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                            timeoutInterval:HttpClient::getInstance()->getTimeoutForConnect()];
@@ -168,7 +167,7 @@ static int processTask(HttpRequest *request, NSString* requestType, void *stream
     [nsrequest setHTTPMethod:requestType];
 
     //if request type is post or put,set header and data
-    if([requestType  isEqual: @"POST"] || [requestType isEqual: @"PUT"])
+    if([requestType  isEqual: @"POST"] || [requestType isEqual: @"PUT"] || [requestType isEqual: @"GET"])
     {
         if ([requestType isEqual: @"PUT"])
         {
@@ -188,15 +187,22 @@ static int processTask(HttpRequest *request, NSString* requestType, void *stream
                 NSString *headerField = [NSString stringWithUTF8String:field.c_str()];
                 NSString *headerValue = [NSString stringWithUTF8String:value.c_str()];
                 [nsrequest setValue:headerValue forHTTPHeaderField:headerField];
+				NSLog(@"Request header [%@] = [%@]", headerField, headerValue);
             }
         }
         
         char* requestDataBuffer = request->getRequestData();
-        if (nullptr !=  requestDataBuffer && 0 != strlen(requestDataBuffer))
-        {
-            NSData *postData = [NSData dataWithBytes:requestDataBuffer length:request->getRequestDataSize()];
-            [nsrequest setHTTPBody:postData];
-        }
+
+		if ([requestType isEqual:@"GET"]) {
+//			request->setUrl([NSString stringWithFormat:@"%s/%s", request->getUrl(), requestDataBuffer].UTF8String);
+//			NSLog(@"URL: %s", request->getUrl());
+		} else {
+			if (nullptr !=  requestDataBuffer && 0 != strlen(requestDataBuffer))
+			{
+				NSData *postData = [NSData dataWithBytes:requestDataBuffer length:request->getRequestDataSize()];
+				[nsrequest setHTTPBody:postData];
+			}
+		}
     }
 
     //read cookie propertities from file and set cookie

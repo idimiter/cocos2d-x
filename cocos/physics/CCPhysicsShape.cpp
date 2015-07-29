@@ -530,7 +530,7 @@ bool PhysicsShapePolygon::init(const Vec2* points, int count, const PhysicsMater
 {
     do
     {
-        _type = Type::POLYGEN;
+        _type = Type::POLYGON;
         
         auto vecs = new cpVect[count];
         PhysicsHelper::points2cpvs(points, vecs, count);

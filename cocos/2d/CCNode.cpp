@@ -255,14 +255,14 @@ void Node::setSkewX(float skewX)
 {
     if (_skewX == skewX)
         return;
-    
+
 #if CC_USE_PHYSICS
     if (_physicsBody != nullptr)
     {
         CCLOG("Node WARNING: PhysicsBody doesn't support setSkewX");
     }
 #endif
-    
+
     _skewX = skewX;
     _transformUpdated = _transformDirty = _inverseDirty = true;
 }
@@ -276,14 +276,14 @@ void Node::setSkewY(float skewY)
 {
     if (_skewY == skewY)
         return;
-    
+
 #if CC_USE_PHYSICS
     if (_physicsBody != nullptr)
     {
         CCLOG("Node WARNING: PhysicsBody doesn't support setSkewY");
     }
 #endif
-    
+
     _skewY = skewY;
     _transformUpdated = _transformDirty = _inverseDirty = true;
 }
@@ -292,7 +292,7 @@ void Node::setLocalZOrder(int z)
 {
     if (_localZOrder == z)
         return;
-    
+
     _localZOrder = z;
     if (_parent)
     {
@@ -330,7 +330,7 @@ void Node::setRotation(float rotation)
 {
     if (_rotationZ_X == rotation)
         return;
-    
+
     _rotationZ_X = _rotationZ_Y = rotation;
     _transformUpdated = _transformDirty = _inverseDirty = true;
 #if CC_USE_PHYSICS
@@ -422,17 +422,17 @@ void Node::setRotationSkewX(float rotationX)
 {
     if (_rotationZ_X == rotationX)
         return;
-    
+
 #if CC_USE_PHYSICS
     if (_physicsBody != nullptr)
     {
         CCLOG("Node WARNING: PhysicsBody doesn't support setRotationSkewX");
     }
 #endif
-    
+
     _rotationZ_X = rotationX;
     _transformUpdated = _transformDirty = _inverseDirty = true;
-    
+
     updateRotationQuat();
 }
 
@@ -445,17 +445,17 @@ void Node::setRotationSkewY(float rotationY)
 {
     if (_rotationZ_Y == rotationY)
         return;
-    
+
 #if CC_USE_PHYSICS
     if (_physicsBody != nullptr)
     {
         CCLOG("Node WARNING: PhysicsBody doesn't support setRotationSkewY");
     }
 #endif
-    
+
     _rotationZ_Y = rotationY;
     _transformUpdated = _transformDirty = _inverseDirty = true;
-    
+
     updateRotationQuat();
 }
 
@@ -471,7 +471,7 @@ void Node::setScale(float scale)
 {
     if (_scaleX == scale && _scaleY == scale && _scaleZ == scale)
         return;
-    
+
     _scaleX = _scaleY = _scaleZ = scale;
     _transformUpdated = _transformDirty = _inverseDirty = true;
 #if CC_USE_PHYSICS
@@ -492,7 +492,7 @@ void Node::setScale(float scaleX,float scaleY)
 {
     if (_scaleX == scaleX && _scaleY == scaleY)
         return;
-    
+
     _scaleX = scaleX;
     _scaleY = scaleY;
     _transformUpdated = _transformDirty = _inverseDirty = true;
@@ -508,7 +508,7 @@ void Node::setScaleX(float scaleX)
 {
     if (_scaleX == scaleX)
         return;
-    
+
     _scaleX = scaleX;
     _transformUpdated = _transformDirty = _inverseDirty = true;
 #if CC_USE_PHYSICS
@@ -529,7 +529,7 @@ void Node::setScaleZ(float scaleZ)
 {
     if (_scaleZ == scaleZ)
         return;
-    
+
 #if CC_USE_PHYSICS
     if (_physicsBody != nullptr)
     {
@@ -537,7 +537,7 @@ void Node::setScaleZ(float scaleZ)
 //        CCLOG("Node WARNING: PhysicsBody doesn't support setScaleZ");
     }
 #endif
-    
+
     _scaleZ = scaleZ;
     _transformUpdated = _transformDirty = _inverseDirty = true;
 }
@@ -553,7 +553,7 @@ void Node::setScaleY(float scaleY)
 {
     if (_scaleY == scaleY)
         return;
-    
+
     _scaleY = scaleY;
     _transformUpdated = _transformDirty = _inverseDirty = true;
 #if CC_USE_PHYSICS
@@ -1477,7 +1477,7 @@ void Node::onExit()
             return;
     }
 #endif
-    
+      
     this->pause();
     
     _running = false;

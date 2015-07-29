@@ -134,6 +134,7 @@ public:
     inline void setRequestData(const char* buffer, size_t len)
     {
         _requestData.assign(buffer, buffer + len);
+		_requestData.push_back(0); // Zero terminate string
     };
     /** Get the request data pointer back */
     inline char* getRequestData()

@@ -162,6 +162,7 @@ void HttpClient::networkThread()
 // Worker thread
 void HttpClient::networkThreadAlone(HttpRequest* request)
 {
+	CCLOG("????!!!!");
     // Create a HttpResponse object, the default setting is http access failed
     HttpResponse *response = new (std::nothrow) HttpResponse(request);
     char errorBuffer[CURL_ERROR_SIZE] = { 0 };

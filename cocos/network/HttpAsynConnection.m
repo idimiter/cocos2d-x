@@ -46,7 +46,7 @@
     responseData = [NSMutableData new];
     getDataTime = 0;
     responseError = nil;
-    
+
     // create the connection with the target request and this class as the delegate
     self.conn = [[NSURLConnection alloc] initWithRequest:request
                                                 delegate:self
@@ -59,8 +59,21 @@
 }
 
 #pragma mark NSURLConnectionDelegate methods
+
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
+	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+	if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+		[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+
+	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+}
+
+
 /**
- * This delegate method is called when the NSURLConnection connects to the server.  It contains the 
+ * This delegate method is called when the NSURLConnection connects to the server.  It contains the
  * NSURLResponse object with the headers returned by the server.  This method may be called multiple times.
  * Therefore, it is important to reset the data on each call.  Do not assume that it is the first call
  * of this method.
@@ -105,7 +118,6 @@
 - (void)connection:(NSURLConnection *)connection 
     didReceiveData:(NSData *)data
 {
-    //NSLog(@"get some data");
     [responseData appendData:data];
     getDataTime++;
 }
@@ -117,7 +129,7 @@
 - (void)connection:(NSURLConnection *)connection 
   didFailWithError:(NSError *)error
 {
-    //NSLog(@"Load failed with error %@", [error localizedDescription]);
+    NSLog(@"Load failed with error %@", [error localizedDescription]);
     responseError = [error copy];
     
     finish = true;
@@ -133,58 +145,59 @@
 }
 
 //Server evaluates client's certificate
-- (BOOL) shouldTrustProtectionSpace:(NSURLProtectionSpace*)protectionSpace
-{
-    if(sslFile == nil)
-        return YES;
-    //load the bundle client certificate
-    NSString *certPath = [[NSBundle mainBundle] pathForResource:sslFile ofType:@"der"];
-    NSData *certData = [[NSData alloc] initWithContentsOfFile:certPath];
-    CFDataRef certDataRef = (CFDataRef)certData;
-    SecCertificateRef cert = SecCertificateCreateWithData(NULL, certDataRef);
-    
-    //Establish a chain of trust anchored on our bundled certificate
-    CFArrayRef certArrayRef = CFArrayCreate(NULL, (void*)&cert, 1, NULL);
-    SecTrustRef serverTrust = protectionSpace.serverTrust;
-    SecTrustSetAnchorCertificates(serverTrust, certArrayRef);
-    
-    //Verify that trust
-    SecTrustResultType trustResult;
-    SecTrustEvaluate(serverTrust, &trustResult);
-    
-    if(trustResult == kSecTrustResultRecoverableTrustFailure)
-    {
-        CFDataRef errDataRef = SecTrustCopyExceptions(serverTrust);
-        SecTrustSetExceptions(serverTrust, errDataRef);
-        
-        SecTrustEvaluate(serverTrust, &trustResult);
-    }
-    
-    //Did our custom trust chain evaluate successfully?
-    return trustResult = kSecTrustResultUnspecified || trustResult == kSecTrustResultProceed;    
-}
+//- (BOOL) shouldTrustProtectionSpace:(NSURLProtectionSpace*)protectionSpace
+//{
+//    if(sslFile == nil)
+//        return YES;
+//    //load the bundle client certificate
+//    NSString *certPath = [[NSBundle mainBundle] pathForResource:sslFile ofType:@"der"];
+//    NSData *certData = [[NSData alloc] initWithContentsOfFile:certPath];
+//    CFDataRef certDataRef = (CFDataRef)certData;
+//    SecCertificateRef cert = SecCertificateCreateWithData(NULL, certDataRef);
+//    
+//    //Establish a chain of trust anchored on our bundled certificate
+//    CFArrayRef certArrayRef = CFArrayCreate(NULL, (void*)&cert, 1, NULL);
+//    SecTrustRef serverTrust = protectionSpace.serverTrust;
+//    SecTrustSetAnchorCertificates(serverTrust, certArrayRef);
+//    
+//    //Verify that trust
+//    SecTrustResultType trustResult;
+//    SecTrustEvaluate(serverTrust, &trustResult);
+//    
+//    if(trustResult == kSecTrustResultRecoverableTrustFailure)
+//    {
+//        CFDataRef errDataRef = SecTrustCopyExceptions(serverTrust);
+//        SecTrustSetExceptions(serverTrust, errDataRef);
+//        
+//        SecTrustEvaluate(serverTrust, &trustResult);
+//    }
+//    
+//    //Did our custom trust chain evaluate successfully?
+//    return trustResult = kSecTrustResultUnspecified || trustResult == kSecTrustResultProceed;    
+//}
 
-- (void) connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-{
-    id <NSURLAuthenticationChallengeSender> sender = challenge.sender;
-    NSURLProtectionSpace *protectionSpace = challenge.protectionSpace;
-    
-    //Should server trust client?
-    if([self shouldTrustProtectionSpace:protectionSpace])
-    {
-        SecTrustRef trust = [protectionSpace serverTrust];
-//        
-//        SecCertificateRef certificate = SecTrustGetCertificateAtIndex(trust, 0);
-//        
-//        NSData *serverCertificateData = (NSData*)SecCertificateCopyData(certificate);
-//        NSString *serverCertificateDataHash = [[serverCertificateData base64EncodedString] ]
-        NSURLCredential *credential = [NSURLCredential credentialForTrust:trust];
-        [sender useCredential:credential forAuthenticationChallenge:challenge];
-    }
-    else
-    {
-        [sender cancelAuthenticationChallenge:challenge];
-    }
-}
+//- (void) connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+//{
+//    id <NSURLAuthenticationChallengeSender> sender = challenge.sender;
+//    NSURLProtectionSpace *protectionSpace = challenge.protectionSpace;
+//    
+//    //Should server trust client?
+//    if([self shouldTrustProtectionSpace:protectionSpace])
+//    {
+//        SecTrustRef trust = [protectionSpace serverTrust];
+////        
+////        SecCertificateRef certificate = SecTrustGetCertificateAtIndex(trust, 0);
+////        
+////        NSData *serverCertificateData = (NSData*)SecCertificateCopyData(certificate);
+////        NSString *serverCertificateDataHash = [[serverCertificateData base64EncodedString] ]
+//        NSURLCredential *credential = [NSURLCredential credentialForTrust:trust];
+//        [sender useCredential:credential forAuthenticationChallenge:challenge];
+//    }
+//    else
+//    {
+//		NSLog(@"Canceling auth challange");
+//        [sender cancelAuthenticationChallenge:challenge];
+//    }
+//}
 
 @end

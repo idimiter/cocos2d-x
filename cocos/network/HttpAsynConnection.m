@@ -43,7 +43,7 @@
     NSLog(@"Starting to load %@", srcURL);
     finish = false;
 
-    responseData = [NSMutableData new];
+    responseData = [NSMutableData data];
     getDataTime = 0;
     responseError = nil;
 
@@ -90,7 +90,7 @@
     statusString = [[NSHTTPURLResponse localizedStringForStatusCode:responseCode] copy];
     if(responseCode == 200)
         statusString = @"OK";
- 
+
     /*The individual values of the numeric status codes defined for HTTP/1.1
     | “200”  ; OK
     | “201”  ; Created

@@ -2082,6 +2082,11 @@ void Node::updatePhysicsBodyTransform(const Mat4& parentTransform, uint32_t pare
         Vec3 vec3(_position.x, _position.y, 0);
         Vec3 ret;
         parentTransform.transformPoint(vec3, &ret);
+
+		// Mitko quick dirty fix for asserting in some wierd situations
+		if (_physicsBody->getVelocity().x == NAN || _physicsBody->getVelocity().y == NAN)
+			_physicsBody->setVelocity(Vec2::ZERO);
+
         _physicsBody->setPosition(Vec2(ret.x, ret.y));
         _physicsBody->setScale(scaleX / _physicsScaleStartX, scaleY / _physicsScaleStartY);
         _physicsBody->setRotation(_physicsRotation);

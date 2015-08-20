@@ -399,6 +399,7 @@ void PhysicsWorld::queryPoint(PhysicsQueryPointCallbackFunc func, const Vec2& po
 Vector<PhysicsShape*> PhysicsWorld::getShapes(const Vec2& point) const
 {
     Vector<PhysicsShape*> arr;
+
     cpSpaceNearestPointQuery(_cpSpace,
                              PhysicsHelper::point2cpv(point),
                              0,
@@ -406,19 +407,19 @@ Vector<PhysicsShape*> PhysicsWorld::getShapes(const Vec2& point) const
                              CP_NO_GROUP,
                              (cpSpaceNearestPointQueryFunc)PhysicsWorldCallback::getShapesAtPointFunc,
                              &arr);
-    
-    return arr;
+
+	return arr;
 }
 
-PhysicsShape* PhysicsWorld::getShape(const Vec2& point) const
+PhysicsShape* PhysicsWorld::getShape(const Vec2& point, float distance) const
 {
     cpShape* shape = cpSpaceNearestPointQueryNearest(_cpSpace,
                                     PhysicsHelper::point2cpv(point),
-                                    0,
+                                    distance,
                                     CP_ALL_LAYERS,
                                     CP_NO_GROUP,
                                     nullptr);
-    
+
     return shape == nullptr ? nullptr : s_physicsShapeMap.find(shape)->second;
 }
 
@@ -725,7 +726,8 @@ void PhysicsWorld::doRemoveJoint(PhysicsJoint* joint)
 {
     for (auto constraint : joint->_cpConstraints)
     {
-        cpSpaceRemoveConstraint(_cpSpace, constraint);
+		if (constraint && cpSpaceContainsConstraint(_cpSpace, constraint))
+			cpSpaceRemoveConstraint(_cpSpace, constraint);
     }
     _joints.remove(joint);
     joint->_world = nullptr;

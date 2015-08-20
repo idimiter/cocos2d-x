@@ -115,7 +115,7 @@ public:
     /** Get phsyics shapes that contains the point. */
     Vector<PhysicsShape*> getShapes(const Vec2& point) const;
     /** return physics shape that contains the point. */
-    PhysicsShape* getShape(const Vec2& point) const;
+    PhysicsShape* getShape(const Vec2& point, float distance = 0) const;
     /** Get all the bodys that in the physics world. */
     const Vector<PhysicsBody*>& getAllBodies() const;
     /** Get body by tag */

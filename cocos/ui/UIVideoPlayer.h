@@ -76,6 +76,12 @@ namespace experimental{
             virtual void onPlayEvent(int event);
             virtual void draw(Renderer *renderer, const Mat4& transform, uint32_t flags) override;
 
+			// MITKO
+			virtual void setControlsVisible(bool visible);
+			virtual void setFullscreen(bool fullscreen);
+			virtual void toggleFullscreen();
+			virtual bool isFullscreen();
+
         protected:
             virtual cocos2d::ui::Widget* createCloneInstance() override;
             virtual void copySpecialProperties(Widget* model) override;

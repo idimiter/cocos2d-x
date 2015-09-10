@@ -304,6 +304,26 @@ void VideoPlayer::setURL(const std::string& videoUrl)
     [((UIVideoViewWrapperIos*)_videoView) setURL:(int)_videoSource :_videoURL];
 }
 
+void VideoPlayer::setControlsVisible(bool visible) {
+	if (visible)
+		((UIVideoViewWrapperIos*)_videoView).moviePlayer.controlStyle = MPMovieControlStyleDefault;
+	else
+		((UIVideoViewWrapperIos*)_videoView).moviePlayer.controlStyle = MPMovieControlStyleNone;
+}
+
+void VideoPlayer::setFullscreen(bool fullscreen) {
+	[((UIVideoViewWrapperIos*)_videoView).moviePlayer setFullscreen:fullscreen];
+}
+
+void VideoPlayer::toggleFullscreen() {
+	auto mp = ((UIVideoViewWrapperIos*)_videoView).moviePlayer;
+	[mp setFullscreen:!mp.isFullscreen];
+}
+
+bool VideoPlayer::isFullscreen() {
+	return [((UIVideoViewWrapperIos*)_videoView).moviePlayer isFullscreen];
+}
+
 void VideoPlayer::draw(Renderer* renderer, const Mat4 &transform, uint32_t flags)
 {
     cocos2d::ui::Widget::draw(renderer,transform,flags);
